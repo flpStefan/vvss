@@ -21,15 +21,21 @@ public class DateService {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
     }
-    public Date getDateValueFromLocalDate(LocalDate localDate){//for getting from DatePicker
+    public Date getDateValueFromLocalDate(LocalDate localDate) {
+        if (localDate == null) {
+            System.out.println("Warning: LocalDate is null, returning null.");
+            return new Date(); // or return new Date(); to default to current date
+        }
+
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         return Date.from(instant);
     }
+
     public Date getDateMergedWithTime(String time, Date noTimeDate) {//to retrieve Date object from both DatePicker and time field
         String[] units = time.split(":");
         int hour = Integer.parseInt(units[0]);
         int minute = Integer.parseInt(units[1]);
-        if (hour > HOURS_IN_A_DAY || minute > MINUTES_IN_HOUR) throw new IllegalArgumentException("time unit exceeds bounds");
+        if (hour >= HOURS_IN_A_DAY || minute >= MINUTES_IN_HOUR) throw new IllegalArgumentException("time unit exceeds bounds");
         Calendar calendar = GregorianCalendar.getInstance();
         calendar.setTime(noTimeDate);
         calendar.set(Calendar.HOUR_OF_DAY, hour);

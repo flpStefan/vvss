@@ -15,9 +15,10 @@ import java.util.Date;
 public class TaskIO {
     private static final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("[yyyy-MM-dd HH:mm:ss.SSS]");
     private static final String[] TIME_ENTITY = {" day"," hour", " minute"," second"};
-    private static final int secondsInDay = 86400;
-    private static final int secondsInHour = 3600;
-    private static final int secondsInMin = 60;
+    private static final int SECONDS_IN_DAY = 86400;
+    private static final int SECONDS_IN_HOUR = 3600;
+    private static final int SECONDS_IN_MIN = 60;
+    private static final String READING_WRITING_EXCEPTION_TEXT = "IO exception reading or writing file";
 
     private static final Logger log = Logger.getLogger(TaskIO.class.getName());
     public static void write(TaskList tasks, OutputStream out) throws IOException {
@@ -75,7 +76,7 @@ public class TaskIO {
             write(tasks,fos);
         }
         catch (IOException e){
-            log.error("IO exception reading or writing file");
+            log.error(READING_WRITING_EXCEPTION_TEXT);
         }
         finally {
             fos.close();
@@ -89,7 +90,7 @@ public class TaskIO {
             read(tasks, fis);
         }
         catch (IOException e){
-            log.error("IO exception reading or writing file");
+            log.error(READING_WRITING_EXCEPTION_TEXT);
         }
         finally {
             fis.close();
@@ -124,7 +125,7 @@ public class TaskIO {
             write(tasks, fileWriter);
         }
         catch (IOException e ){
-            log.error("IO exception reading or writing file");
+            log.error(READING_WRITING_EXCEPTION_TEXT);
         }
         finally {
             fileWriter.close();
@@ -161,49 +162,55 @@ public class TaskIO {
         return result;
     }
     //
-    private static int getIntervalFromText(String line){
-        int days, hours, minutes, seconds;
-        //[1 day 2 hours 46 minutes 40 seconds].
-        //[46 minutes 40 seconds].
-        //[46 minutes].
+    private static int getIntervalFromText(String line) {
+        String interval = extractInterval(line);
+        int[] timeEntities = parseTimeEntities(interval);
+        return calculateTotalSeconds(timeEntities);
+    }
+
+    private static String extractInterval(String line) {
         int start = line.lastIndexOf("[");
         int end = line.lastIndexOf("]");
-        String trimmed = line.substring(start+1, end);//returns interval without brackets -> 2 hours 46 minutes
-        days = trimmed.contains("day") ? 1 : 0;
-        hours = trimmed.contains("hour") ? 1 : 0;
-        minutes = trimmed.contains("minute") ? 1 : 0;
-        seconds = trimmed.contains("second") ? 1 : 0;
+        return line.substring(start + 1, end).trim();  // Extracts interval without brackets
+    }
+
+    private static int[] parseTimeEntities(String interval) {
+        int days = 0, hours = 0, minutes = 0, seconds = 0;
+
+        // Check if interval contains certain time components and assign a value
+        days = interval.contains("day") ? 1 : 0;
+        hours = interval.contains("hour") ? 1 : 0;
+        minutes = interval.contains("minute") ? 1 : 0;
+        seconds = interval.contains("second") ? 1 : 0;
+
+        String[] numAndTextValues = interval.split(" "); // Example: {"46", "minutes", "40", "seconds"}
 
         int[] timeEntities = new int[]{days, hours, minutes, seconds};
-        int i = 0, j = timeEntities.length-1;// positions of timeEntities available
-        while (i != 1 && j != 1) {
-            if (timeEntities[i] == 0) i++;
-            if (timeEntities[j] == 0) j--;
-        }
 
-        String[] numAndTextValues = trimmed.split(" "); //{"46", "minutes", "40", "seconds"};
-        for (int k = 0 ; k < numAndTextValues.length; k+=2){
+        // Map the time values to their corresponding positions in the array
+        int i = 0;
+        for (int k = 0; k < numAndTextValues.length; k += 2) {
             timeEntities[i] = Integer.parseInt(numAndTextValues[k]);
             i++;
         }
+        return timeEntities;
+    }
 
+    private static int calculateTotalSeconds(int[] timeEntities) {
         int result = 0;
-        for (int p = 0; p < timeEntities.length; p++){
-            if (timeEntities[p] != 0 && p == 0){
-                result+=secondsInDay*timeEntities[p];
-            }
-            if (timeEntities[p] != 0 && p == 1){
-                result+=secondsInHour*timeEntities[p];
-            }
-            if (timeEntities[p] != 0 && p == 2){
-                result+=secondsInMin*timeEntities[p];
-            }
-            if (timeEntities[p] != 0 && p == 3){
-                result+=timeEntities[p];
-            }
-        }
+        // Constants for time conversion
+        final int SECONDS_IN_DAY = 86400;
+        final int SECONDS_IN_HOUR = 3600;
+        final int SECONDS_IN_MIN = 60;
+
+        // Calculate the total time in seconds based on the time entities
+        if (timeEntities[0] != 0) result += SECONDS_IN_DAY * timeEntities[0];
+        if (timeEntities[1] != 0) result += SECONDS_IN_HOUR * timeEntities[1];
+        if (timeEntities[2] != 0) result += SECONDS_IN_MIN * timeEntities[2];
+        if (timeEntities[3] != 0) result += timeEntities[3];
         return result;
     }
+
 
     private static Date getDateFromText (String line, boolean isStartTime) {
         Date date = null;
@@ -266,10 +273,10 @@ public class TaskIO {
         if (interval <= 0) throw new IllegalArgumentException("Interval <= 0");
         StringBuilder sb = new StringBuilder();
 
-        int days = interval/secondsInDay;
-        int hours = (interval - secondsInDay*days) / secondsInHour;
-        int minutes = (interval - (secondsInDay*days + secondsInHour*hours)) / secondsInMin;
-        int seconds = (interval - (secondsInDay*days + secondsInHour*hours + secondsInMin*minutes));
+        int days = interval/ SECONDS_IN_DAY;
+        int hours = (interval - SECONDS_IN_DAY *days) / SECONDS_IN_HOUR;
+        int minutes = (interval - (SECONDS_IN_DAY *days + SECONDS_IN_HOUR *hours)) / SECONDS_IN_MIN;
+        int seconds = (interval - (SECONDS_IN_DAY *days + SECONDS_IN_HOUR *hours + SECONDS_IN_MIN *minutes));
 
         int[] time = new int[]{days, hours, minutes, seconds};
         int i = 0, j = time.length-1;
@@ -296,7 +303,7 @@ public class TaskIO {
             TaskIO.writeBinary(taskList, Main.savedTasksFile);
         }
         catch (IOException e){
-            log.error("IO exception reading or writing file");
+            log.error(READING_WRITING_EXCEPTION_TEXT);
         }
     }
 }

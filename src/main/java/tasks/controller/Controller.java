@@ -1,5 +1,6 @@
 package tasks.controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -138,11 +139,27 @@ public class Controller {
         tasks.setItems(observableTasks);
         updateCountLabel(observableTasks);
     }
-    private Date getDateFromFilterField(LocalDate localDate, String time){
+    private Date getDateFromFilterField(LocalDate localDate, String time) {
         Date date = dateService.getDateValueFromLocalDate(localDate);
-        return dateService.getDateMergedWithTime(time, date);
+
+        try {
+            return dateService.getDateMergedWithTime(time, date);
+        } catch (Exception e) {
+            System.out.println("Invalid time format: " + time);
+            showAlert("Invalid time format", "Insert a valid time format");
+            return new Date();
+        }
     }
 
+    private void showAlert(String title, String message) {
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle(title);
+            alert.setHeaderText(null);
+            alert.setContentText(message);
+            alert.showAndWait();
+        });
+    }
 
     public void resetFilteredTasks(){
         tasks.setItems(tasksList);

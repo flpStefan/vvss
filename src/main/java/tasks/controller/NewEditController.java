@@ -6,10 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.apache.log4j.Logger;
@@ -74,15 +71,27 @@ public class NewEditController {
         this.service =service;
         this.dateService =new DateService(service);
     }
-    public void setCurrentTask(Task task){
-        this.currentTask=task;
-        switch (clickedButton.getId()){
-            case  "btnNew" : initNewWindow("New Task");
+    public void setCurrentTask(Task task) {
+        this.currentTask = task;
+
+        switch (clickedButton.getId()) {
+            case "btnNew":
+                initNewWindow("New Task");
                 break;
-            case "btnEdit" : initEditWindow("Edit Task");
+            case "btnEdit":
+                if (currentTask == null) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning");
+                    alert.setHeaderText("No Task Selected");
+                    alert.setContentText("Please select a task before editing.");
+                    alert.showAndWait();
+                } else {
+                    initEditWindow("Edit Task");
+                }
                 break;
         }
     }
+
 
     @FXML
     public void initialize(){
@@ -102,6 +111,7 @@ public class NewEditController {
     }
 
     private void initEditWindow(String title){
+        if(currentTask != null){
         currentStage.setTitle(title);
         fieldTitle.setText(currentTask.getTitle());
         datePickerStart.setValue(dateService.getLocalDateValueFromDate(currentTask.getStartTime()));
@@ -116,7 +126,10 @@ public class NewEditController {
         }
         if (currentTask.isActive()){
             checkBoxActive.setSelected(true);
-
+        }
+        }
+        else{
+            System.out.println("The task can't be null");
         }
     }
     @FXML
