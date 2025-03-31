@@ -128,3 +128,10 @@
 2025-03-13 18:51:32 INFO  Controller:75 - Main controller initializing
 2025-03-13 18:51:36 INFO  TaskInfoController:24 - task info window initializing
 2025-03-13 18:51:58 INFO  NewEditController:98 - new/edit window initializing
+2025-03-31 02:36:22 INFO  Main:36 - saved data reading
+2025-03-31 02:36:22 INFO  Main:41 - application start
+2025-03-31 02:36:22 INFO  Controller:75 - Main controller initializing
+2025-03-31 02:36:45 INFO  NewEditController:98 - new/edit window initializing
+2025-03-31 03:17:04 INFO  Main:36 - saved data reading
+2025-03-31 03:17:04 INFO  Main:41 - application start
+2025-03-31 03:17:04 INFO  Controller:75 - Main controller initializing
