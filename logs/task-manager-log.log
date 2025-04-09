@@ -135,3 +135,74 @@
 2025-03-31 03:17:04 INFO  Main:36 - saved data reading
 2025-03-31 03:17:04 INFO  Main:41 - application start
 2025-03-31 03:17:04 INFO  Controller:75 - Main controller initializing
+2025-04-08 19:45:04 INFO  Main:36 - saved data reading
+2025-04-08 19:45:04 INFO  Main:41 - application start
+2025-04-08 19:45:05 INFO  Controller:75 - Main controller initializing
+2025-04-08 19:45:10 INFO  NewEditController:98 - new/edit window initializing
+2025-04-08 19:45:14 INFO  NewEditController:98 - new/edit window initializing
+2025-04-08 19:45:18 INFO  NewEditController:98 - new/edit window initializing
+2025-04-08 19:45:24 INFO  NewEditController:98 - new/edit window initializing
+2025-04-08 19:45:26 INFO  TaskInfoController:24 - task info window initializing
+2025-04-08 19:45:47 INFO  NewEditController:98 - new/edit window initializing
+2025-04-08 20:00:12 INFO  Main:36 - saved data reading
+2025-04-08 20:00:12 INFO  Main:41 - application start
+2025-04-08 20:00:12 INFO  Controller:75 - Main controller initializing
+2025-04-08 20:00:15 INFO  NewEditController:98 - new/edit window initializing
+2025-04-09 13:34:23 INFO  Main:36 - saved data reading
+2025-04-09 13:34:23 INFO  Main:41 - application start
+2025-04-09 13:34:23 INFO  Controller:75 - Main controller initializing
+2025-04-09 13:34:25 INFO  NewEditController:98 - new/edit window initializing
+2025-04-09 13:34:27 INFO  NewEditController:98 - new/edit window initializing
+2025-04-09 13:34:30 INFO  NewEditController:98 - new/edit window initializing
+2025-04-09 13:41:10 INFO  Main:38 - saved data reading
+2025-04-09 13:41:10 INFO  Main:43 - application start
+2025-04-09 13:41:10 INFO  Controller:75 - Main controller initializing
+2025-04-09 13:41:14 INFO  NewEditController:98 - new/edit window initializing
+2025-04-09 15:36:35 INFO  Main:38 - saved data reading
+2025-04-09 15:36:35 INFO  Main:43 - application start
+2025-04-09 15:36:36 INFO  Controller:75 - Main controller initializing
+2025-04-09 16:05:42 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:05:42 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:05:42 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:05:42 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 16:05:42 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:07:53 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:07:53 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:07:53 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:07:53 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 16:07:53 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:16:38 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:16:38 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:16:38 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:16:38 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 16:16:38 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:24:23 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:24:23 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:24:23 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 16:24:23 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 17:40:01 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 17:40:01 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 17:40:01 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 17:40:01 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 17:40:15 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 17:40:15 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 17:40:15 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 17:40:15 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 17:40:37 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 17:40:37 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 17:40:38 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 17:40:38 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 17:55:32 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 17:55:32 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 17:55:32 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 17:55:32 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 18:10:21 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 18:10:21 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 18:10:47 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 18:10:47 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 18:11:09 ERROR LinkedTaskList:83 - index doesn't exist
+2025-04-09 18:11:09 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 18:20:00 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 18:56:47 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 19:07:22 ERROR LinkedTaskList:56 - removing task that doesn't exist
+2025-04-09 19:08:45 ERROR LinkedTaskList:56 - removing task that doesn't exist

@@ -2,17 +2,17 @@ package tasks.services;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import tasks.model.ArrayTaskList;
 import tasks.model.Task;
+import tasks.model.TaskList;
 import tasks.model.TasksOperations;
 
 import java.util.Date;
 
 public class TasksService {
 
-    private ArrayTaskList tasks;
+    private TaskList tasks;
 
-    public TasksService(ArrayTaskList tasks){
+    public TasksService(TaskList tasks){
         this.tasks = tasks;
     }
 
