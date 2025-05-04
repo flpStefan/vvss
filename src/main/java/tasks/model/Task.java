@@ -117,6 +117,7 @@ public class Task implements Serializable, Cloneable {
         }
         return null;
     }
+
     //duplicate methods for TableView which sets column
     // value by single method and doesn't allow passing parameters
     public String getFormattedDateStart(){
