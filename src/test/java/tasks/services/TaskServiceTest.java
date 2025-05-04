@@ -101,4 +101,71 @@ class TaskServiceTest {
         Date noTimeDate = new GregorianCalendar(2025, Calendar.MARCH, 30).getTime();
         assertThrows(IllegalArgumentException.class, () -> dateService.getDateMergedWithTime(time, noTimeDate));
     }
+
+    @Order(7)
+    @Test
+    @DisplayName("Add Task to ArrayTaskList")
+    public void addValidTask() {
+        Date taskTime = new GregorianCalendar(2025, Calendar.MARCH, 30, 10, 0).getTime();
+        tasks.model.Task task = new tasks.model.Task("Test Task", taskTime);
+
+        assertEquals(0, taskList.size());
+
+        taskList.add(task);
+
+        assertEquals(1, taskList.size());
+
+        assertEquals(task, taskList.getTask(0));
+
+        Date taskTime2 = new GregorianCalendar(2025, Calendar.MARCH, 31, 11, 0).getTime();
+        tasks.model.Task task2 = new tasks.model.Task("Test Task 2", taskTime2);
+        taskList.add(task2);
+
+        assertEquals(2, taskList.size());
+
+        assertEquals(task, taskList.getTask(0));
+        assertEquals(task2, taskList.getTask(1));
+    }
+
+    @Order(8)
+    @Test
+    @DisplayName("Add invalid (null) Task to ArrayTaskList")
+    public void addInvalidTask() {
+        assertEquals(0, taskList.size());
+
+        assertThrows(NullPointerException.class, () -> taskList.add(null));
+
+        assertEquals(0, taskList.size());
+    }
+
+    @Order(9)
+    @Test
+    @DisplayName("Add Task - BVA Valid Case")
+    public void addTaskBVAValid() {
+        Date taskTime = new GregorianCalendar(1970, Calendar.JANUARY, 1, 0, 0).getTime(); // Earliest valid time
+        tasks.model.Task task = new tasks.model.Task("Valid Title", taskTime);
+        task.setActive(true);
+        task.setTime(taskTime, new GregorianCalendar(1970, Calendar.JANUARY, 1, 0, 1).getTime(), 1); // Smallest valid interval
+        taskList.add(task);
+        assertEquals(1, taskList.size());
+        assertEquals(task, taskList.getTask(0));
+        assertTrue(taskList.getTask(0).isActive());
+        assertEquals(1, taskList.getTask(0).getRepeatInterval());
+    }
+
+    @Order(10)
+    @Test
+    @DisplayName("Add Task - BVA Invalid Case")
+    public void addTaskBVAInvalid() {
+        assertThrows(NullPointerException.class, () -> taskList.add(null));
+
+        Date startTime = new GregorianCalendar(2025, Calendar.MARCH, 30, 10, 0).getTime();
+        Date endTime = new GregorianCalendar(2025, Calendar.MARCH, 30, 11, 0).getTime();
+
+        assertThrows(IllegalArgumentException.class, () ->
+                new tasks.model.Task("Invalid Task", startTime, endTime, 0));
+
+        assertThrows(IllegalArgumentException.class, () ->
+                new tasks.model.Task("Invalid Task", new Date(-1)));
+    }
 }
